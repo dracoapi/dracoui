@@ -101,7 +101,7 @@
             var left = global.map.creatureList.filter(p => p.name == selected.name).length - 1;
             var msg = `Are you sure you want to transfer this ${selected.display}? <br /> You will have <b>${left}</b> left.`;
             confirmAndSendToServer(msg, () => {
-                gtag("event", "transfer", selected.display);
+                gtag('event', 'transfer', selected.display);
                 global.ws.emit("transfer_creature", { id: id });
                 global.map.creatureList.splice(idx, 1);
                 parent.parent().fadeOut();
