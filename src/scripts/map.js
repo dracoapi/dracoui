@@ -127,12 +127,11 @@ Map.prototype.initPath = function() {
 }
 
 Map.prototype.initCatches = function() {
-    for (var i = 0; i < this.catches.length; i++) {
-        var pt = this.catches[i];
-        var pkmId = String(pt.id);
-        pkmId = '0'.repeat(3 - pkmId.length) + pkmId;
-        var icon = L.icon({ iconUrl: `./assets/pokemon/${pkmId}.png`, iconSize: [60, 60], iconAnchor: [30, 30]});
-        var pkm = `${pt.name} <br /> Cp:${pt.cp} Iv:${pt.iv}%`;
+    for (let i = 0; i < this.catches.length; i++) {
+        let pt = this.catches[i];
+        let creature = pt.fullname;
+        let icon = L.icon({ iconUrl: `./assets/creatures/${creature}.png`, iconSize: [60, 60], iconAnchor: [30, 30]});
+        let pkm = `${pt.name} <br /> Cp:${pt.cp} Iv:${pt.iv}%`;
         if (pt.lvl) {
             pkm = `${pt.name} (lvl ${pt.lvl}) <br /> Cp:${pt.cp} Iv:${pt.iv}%`;
         }
@@ -194,9 +193,8 @@ Map.prototype.addCatch = function(pt) {
         this.layerCatches.clearLayers();
         this.initCatches();
     } else {
-        var creatureType = String(pt.name);
-        creatureType = '0'.repeat(3 - creatureType.length) + creatureType;
-        var icon = L.icon({ iconUrl: `./assets/creatures/${creatureType}.png`, iconSize: [60, 60], iconAnchor: [30, 30] });
+        let creatureType = pt.fullname;
+        let icon = L.icon({ iconUrl: `./assets/creatures/${creatureType}.png`, iconSize: [60, 60], iconAnchor: [30, 30] });
         L.marker([pt.lat, pt.lng], {icon: icon, zIndexOffset: 100 }).bindPopup(info).addTo(this.layerCatches);
     }
 }
@@ -306,8 +304,7 @@ Map.prototype.displayCreatureList = function(all, sortBy, eggs) {
         var transferClass = elt.favorite ? "hide" : "";
         var candyStyle = elt.improvable && needed ? "" : "style='display:none'";
         var hp = Math.round(elt.hp * 100)/100;
-        var creatureId = String(elt.name);
-        creatureId = '0'.repeat(3 - creatureId.length) + creatureId;
+        let creatureId = elt.fullname;
         div.append(`
             <div class="pokemon ${elt.attackValue >= 5 && elt.staminaValue >= 5 ? 'perfect': ''}">
                 <div class="transfer" data-id='${elt.id}'>
@@ -364,11 +361,11 @@ Map.prototype.displayEggsList = function(eggs, max) {
 };
 
 Map.prototype.displayInventory = function(items) {
-    console.log("Inventory list");
-    global.active = "inventory";
-    $(".inventory .sort").hide();
+    console.log('Inventory list');
+    global.active = 'inventory';
+    $('.inventory .sort').hide();
     var count = items.reduce((prev, cur) => prev + cur.count, 0);
-    $(".inventory .numberinfo").text(`${count}/${global.storage.items}`);
+    $('.inventory .numberinfo').text(`${count}/${global.storage.items}`);
     var div = $(".inventory .data");
     div.html(``);
     items.forEach(function(elt) {

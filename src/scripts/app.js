@@ -169,7 +169,7 @@
             });
         });
 
-        $(".player").on("pogo:player_update", () => {
+        $(".player").on('pogo:player_update', () => {
             if (global.player) {
                 // console.log(global.player);
                 var player = $(".player");

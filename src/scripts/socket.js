@@ -71,7 +71,7 @@ function startListenToSocket() {
     socket.on("player_stats", msg => {
         // console.log(msg);
         global.player = msg.player;
-        $(".player").trigger("pogo:player_update");
+        $(".player").trigger('pogo:player_update');
     });
     socket.on('position', pos => {
         if (!global.snipping) {
@@ -174,12 +174,8 @@ function creatureToast(creature, options) {
     var creatureInfo = creature.display;
     if (creature.level) creatureInfo += ` (lvl ${creature.level})`;
 
-    let padId = creature.name.toString();
-    if(padId.length == 1) padId = '00' + padId;
-    if(padId.length == 2) padId = '0' + padId;
-
     var content = `<div>${creatureInfo}</div><div>`;
-    content += `<img src='./assets/creatures/${padId}.png' height='50' />`;
+    content += `<img src='./assets/creatures/${creature.fullname}.png' height='50' />`;
     if (options.ball) content += `<img src='./assets/inventory/${options.ball}.png' height='30' />`;
     content += `</div>`;
     toast(content, title, {
