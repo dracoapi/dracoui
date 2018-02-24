@@ -301,7 +301,7 @@ Map.prototype.displayCreatureList = function(all, sortBy, eggs) {
         var canEvolve = needed && elt.improvable && elt.candies >= needed && !elt.isArenaDefender;
         var evolveStyle = canEvolve ? "" : "hide";
         var evolveClass = canEvolve ? "canEvolve" : "";
-        var transferClass = elt.favorite ? "hide" : "";
+        var transferClass = (elt.isArenaDefender || elt.isLibraryDefender || elt.group > 0) ? "hide" : "";
         var candyStyle = elt.improvable && needed ? "" : "style='display:none'";
         var hp = Math.round(elt.hp * 100)/100;
         let creatureId = elt.fullname;
