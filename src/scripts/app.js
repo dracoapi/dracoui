@@ -139,6 +139,24 @@
             global.ws.emit("favorite_creature", { id: id, favorite: selected.favorite });
         });
 
+        $(".inventory .data").on("click", "a.useItemAction", function(event) {
+            event.preventDefault()
+            let parent = $(this).parent();
+            let itemId = parent.data().id;
+            let name = parent.parent().find('.info').text();
+            let count = parent.data().count;
+            gtag('event', 'use_item', name);
+            global.ws.emit("use_item", { id: itemId });
+            count--;
+            console.log(`Use item ${name}, ${count} left`);
+            if (count === 0) {
+                parent.parent().fadeOut();
+            } else {
+                parent.data("count", count);
+                parent.parent().find(".count").text("x" + count);
+            }
+        });
+
         $(".inventory .data").on("click", "a.dropItemAction", function(event) {
             event.preventDefault();
             var parent = $(this).parent();

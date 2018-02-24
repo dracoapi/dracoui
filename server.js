@@ -20,10 +20,10 @@ io.on('connection', function (socket) {
     socket.on('inventory_list', () => {
         console.log('Sending inventory.');
         socket.emit('inventory_list', [
-            { type: 1, count: 5 },
-            { type: 2, count: 5 },
-            { type: 3, count: 5 },
-            { type: 4, count: 5 },
+            { type: 1, count: 5, removable: true },
+            { type: 2, count: 5, removable: true },
+            { type: 3, count: 5, display: 'SUPER_VISION' },
+            { type: 4, count: 5, display: 'INCENSE' },
         ]);
     });
 });

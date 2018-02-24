@@ -366,13 +366,15 @@ Map.prototype.displayInventory = function(items) {
     $('.inventory .sort').hide();
     var count = items.reduce((prev, cur) => prev + cur.count, 0);
     $('.inventory .numberinfo').text(`${count}/${global.storage.items}`);
-    var div = $(".inventory .data");
+    var div = $('.inventory .data');
     div.html(``);
     items.forEach(function(elt) {
-        var dropStyle = elt.removable ? "" : "hide";
+        var dropStyle = elt.removable ? '' : 'hide';
+        var useStyle = ['INCENSE', 'SUPER_VISION'].indexOf(elt.fulltype) >= 0 ? '' : 'hide';
         div.append(`
             <div class="item">
                 <div class="transfer" data-id='${elt.type}' data-count='${elt.count}'>
+                    <a title='Use' href="#" class="useItemAction ${useStyle}"><img src="./assets/img/use.png" /></a>
                     <a title='Drop' href="#" class="dropItemAction ${dropStyle}"><img src="./assets/img/recyclebin.png" /></a>
                 </div>
 
