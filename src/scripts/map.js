@@ -370,7 +370,7 @@ Map.prototype.displayInventory = function(items) {
     div.html(``);
     items.forEach(function(elt) {
         var dropStyle = elt.removable ? '' : 'hide';
-        var useStyle = ['INCENSE', 'SUPER_VISION'].indexOf(elt.fulltype) >= 0 ? '' : 'hide';
+        var useStyle = ['INCENSE', 'SUPER_VISION', 'EXPERIENCE_BOOSTER'].indexOf(elt.fulltype) >= 0 ? '' : 'hide';
         div.append(`
             <div class="item">
                 <div class="transfer" data-id='${elt.type}' data-count='${elt.count}'>
