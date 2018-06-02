@@ -119,8 +119,14 @@
             confirmAndSendToServer(msg, () => {
                 gtag('event', 'evolve', name);
                 console.log('Evolve ' + id);
+                const needed = Object.values(selected.evolutions)[0];
                 global.ws.emit('evolve_creature', { id: id, to: Object.values(selected.evolutions)[0] });
                 global.map.creatureList.splice(idx, 1);
+                for (const creature of global.map.creatureList) {
+                    if (creature.candyType === selected.candyType) {
+                        creature.candies -= needed;
+                    }
+                }
                 parent.parent().fadeOut();
             });
         });
